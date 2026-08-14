@@ -49,7 +49,7 @@ app.get('/api/cities', async (req, res) => {
         // Grab the search query from the frontend request (e.g., ?q=Canada)
         console.log("2222222222:", req.query)
         const searchQuery = req.query.q;
-        //const countryCode = req.query.country_code;
+        const countryID = req.query.country_id;
         console.log("1:", searchQuery)
 
         if (!searchQuery) {
@@ -61,6 +61,7 @@ app.get('/api/cities', async (req, res) => {
                 url: 'https://city-and-state-search-api.p.rapidapi.com/cities/search',
                 params: {
                         q: searchQuery,
+                        country_id: countryID
                 },
                 headers: {
                         'x-rapidapi-key': process.env.RAPIDAPI_KEY, // Safely hidden on the server!
