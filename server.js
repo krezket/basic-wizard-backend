@@ -76,6 +76,36 @@ app.get('/api/cities', async (req, res) => {
                 res.status(500).json({ error: 'Failed to fetch data' });
         }
 });
+app.get('/api/citydetails', async (req, res) => {
+        const searchQuery = req.query.q;
+        const countryID = req.query.country_id;
+
+        if (!searchQuery) {
+                return res.status(400).json({ error: 'Search query is required' });
+        }
+
+        const options = {
+                method: 'GET',
+                url: 'https://city-and-state-search-api.p.rapidapi.com/cities/search/',
+                params: {
+                        _id: countryID
+                },
+                headers: {
+                        'x-rapidapi-key': process.env.RAPIDAPI_KEY, // Safely hidden on the server!
+                        'x-rapidapi-host': 'city-and-state-search-api.p.rapidapi.com',
+                        'Content-Type': 'application/json'
+                }
+        };
+
+        try {
+                const response = await axios.request(options);
+                // Send the data back to your frontend
+                res.json(response.data);
+        } catch (error) {
+                console.error("Backend API Error:", error.message);
+                res.status(500).json({ error: 'Failed to fetch data' });
+        }
+});
 // Start the server
 app.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
