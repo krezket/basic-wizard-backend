@@ -46,11 +46,8 @@ app.get('/api/countries', async (req, res) => {
 });
 
 app.get('/api/cities', async (req, res) => {
-        // Grab the search query from the frontend request (e.g., ?q=Canada)
-        console.log("2222222222:", req.query)
         const searchQuery = req.query.q;
         const countryID = req.query.country_id;
-        console.log("1:", searchQuery)
 
         if (!searchQuery) {
                 return res.status(400).json({ error: 'Search query is required' });
