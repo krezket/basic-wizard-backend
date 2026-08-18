@@ -76,20 +76,16 @@ app.get('/api/cities', async (req, res) => {
                 res.status(500).json({ error: 'Failed to fetch data' });
         }
 });
-app.get('/api/citydetails', async (req, res) => {
-        const searchQuery = req.query.q;
-        const countryID = req.query.country_id;
+app.get('/api/citydetails/:id', async (req, res) => {
+        const cityid = req.params.id;
 
-        if (!searchQuery) {
+        if (!cityid) {
                 return res.status(400).json({ error: 'Search query is required' });
         }
 
         const options = {
                 method: 'GET',
-                url: 'https://city-and-state-search-api.p.rapidapi.com/cities/search/',
-                params: {
-                        _id: countryID
-                },
+                url: `https://city-and-state-search-api.p.rapidapi.com/cities/${cityid}`,
                 headers: {
                         'x-rapidapi-key': process.env.RAPIDAPI_KEY, // Safely hidden on the server!
                         'x-rapidapi-host': 'city-and-state-search-api.p.rapidapi.com',
