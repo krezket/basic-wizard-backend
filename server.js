@@ -106,7 +106,7 @@ app.get('/api/citydetails/:id', async (req, res) => {
 
 app.post('/api/astrologer', async (req, res) => {
         const userData = req.body;
-        console.log(userData);
+        // console.log(userData);
 
         if (!userData) {
                 return res.status(400).json({ error: 'userData is required' });
@@ -133,7 +133,7 @@ app.post('/api/astrologer', async (req, res) => {
                                 longitude: userData.longitude,
                                 latitude: userData.latitude,
                                 timezone: userData.timezone,
-                                zodiac_type: 'Tropic',
+                                zodiac_type: 'Tropical',
                                 houses_system_identifier: 'P'
                         },
                         theme: 'classic',
@@ -144,11 +144,28 @@ app.post('/api/astrologer', async (req, res) => {
 
         try {
                 const response = await axios.request(options);
-                // Send the data back to your frontend
-                res.json(response.data);
+                // // Send the data back to your frontend
+                // console.log(response.data.chart_data.subject.sun);
+                // console.log(response.data.chart_data.subject.moon);
+                // console.log(response.data.chart_data.subject.mercury);
+                // console.log(response.data.chart_data.subject.venus);
+                // console.log(response.data.chart_data.subject.mars);
+                // console.log(response.data.chart_data.subject.jupiter);
+                // console.log(response.data.chart_data.subject.saturn);
+                // console.log(response.data.chart_data.subject.uranus);
+                // console.log(response.data.chart_data.subject.neptune);
+                // console.log(response.data.chart_data.subject.pluto);
+                // console.log(response.data.chart_data.subject.ascendant);
+                // console.log(response.data.chart_data.subject.descendant);
+                // console.log(response.data.chart_data.subject.medium_coeli);
+                // console.log(response.data.chart_data.subject.imum_coeli);
+                // console.log(response.data.chart_data.subject.chiron);
+                // console.log(response.data.chart_data.subject.mean_lilith);
+                //
+                res.json(response.data.chart_data.subject);
         } catch (error) {
-                console.error("Backend API Error:", error.message);
-                res.status(500).json({ error: 'Failed to fetch data' });
+                console.error("Backend API Error:", error.response?.data || error.message);
+                res.status(500).json({ error: 'Failed to fetch data', details: error.response?.data });
         }
 });
 
