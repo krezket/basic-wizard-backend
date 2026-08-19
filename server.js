@@ -162,7 +162,8 @@ app.post('/api/astrologer', async (req, res) => {
                 // console.log(response.data.chart_data.subject.chiron);
                 // console.log(response.data.chart_data.subject.mean_lilith);
                 //
-                res.json(response.data.chart_data.subject);
+                // res.json(response.data.chart_data.subject);
+                res.json(response.data);
         } catch (error) {
                 console.error("Backend API Error:", error.response?.data || error.message);
                 res.status(500).json({ error: 'Failed to fetch data', details: error.response?.data });
