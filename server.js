@@ -136,8 +136,9 @@ app.post('/api/astrologer', async (req, res) => {
                                 zodiac_type: 'Tropical',
                                 houses_system_identifier: 'P'
                         },
-                        theme: 'classic',
-                        language: 'EN',    
+                        theme: 'dark',
+                        language: 'EN',
+                        transparent_background: true,
                         custom_title: `${userData.wizardName}'s Birth Chart`,
                 }
         };
